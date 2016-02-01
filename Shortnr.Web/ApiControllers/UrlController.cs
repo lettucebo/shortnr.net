@@ -1,18 +1,13 @@
 ﻿using Shortnr.Web.Business;
-using Shortnr.Web.Entities;
+using Shortnr.Web.Data;
 using Shortnr.Web.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 
 namespace Shortnr.Web.ApiControllers
 {
-	[RoutePrefix("api/url")]
+    [RoutePrefix("api/url")]
     public class UrlController : ApiController
     {
 		private IUrlManager _urlManager;

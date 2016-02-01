@@ -69,10 +69,6 @@
       <Project>{6511e0a2-1d3a-4fdd-9b7a-b4edbc66259f}</Project>
       <Name>Shortnr.Web.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Shortnr.Web.Entities\Shortnr.Web.Entities.csproj">
-      <Project>{7b17ef5e-7d1e-4a93-bc75-a5ec36b58b76}</Project>
-      <Name>Shortnr.Web.Entities</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Shortnr.Web.Exceptions\Shortnr.Web.Exceptions.csproj">
       <Project>{d134d44c-1167-41d0-a1f2-cd12a10031ed}</Project>
       <Name>Shortnr.Web.Exceptions</Name>

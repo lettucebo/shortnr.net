@@ -1,16 +1,12 @@
 ﻿using Shortnr.Web.Business;
-using Shortnr.Web.Entities;
+using Shortnr.Web.Data;
 using Shortnr.Web.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Shortnr.Web.Controllers
 {
-	public class UrlController : Controller
+    public class UrlController : Controller
 	{
 		private IUrlManager _urlManager;
 

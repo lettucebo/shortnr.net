@@ -20,6 +20,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -176,6 +177,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="Properties\PublishProfiles\ttin - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -222,10 +224,6 @@
     <ProjectReference Include="..\Shortnr.Web.Data\Shortnr.Web.Data.csproj">
       <Project>{6511e0a2-1d3a-4fdd-9b7a-b4edbc66259f}</Project>
       <Name>Shortnr.Web.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Shortnr.Web.Entities\Shortnr.Web.Entities.csproj">
-      <Project>{7b17ef5e-7d1e-4a93-bc75-a5ec36b58b76}</Project>
-      <Name>Shortnr.Web.Entities</Name>
     </ProjectReference>
     <ProjectReference Include="..\Shortnr.Web.Exceptions\Shortnr.Web.Exceptions.csproj">
       <Project>{d134d44c-1167-41d0-a1f2-cd12a10031ed}</Project>

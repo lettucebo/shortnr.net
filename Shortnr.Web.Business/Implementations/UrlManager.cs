@@ -1,5 +1,4 @@
 ﻿using Shortnr.Web.Data;
-using Shortnr.Web.Entities;
 using Shortnr.Web.Exceptions;
 using System;
 using System.Collections.Generic;
@@ -32,27 +31,35 @@ namespace Shortnr.Web.Business.Implementations
 					{
 						throw new ArgumentException("Invalid URL format");
 					}
-					Uri urlCheck = new Uri(longUrl);
-					HttpWebRequest request = (HttpWebRequest)WebRequest.Create(urlCheck);
-					request.Timeout = 10000;
-					try
-					{
-						HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-					}
-					catch (Exception)
-					{
-						throw new ShortnrNotFoundException();
-					}
+
+                    bool validateUrl = false;
+                    bool.TryParse(ConfigurationManager.AppSettings["ValidateRemoteUrl"], out validateUrl);
+                    if (validateUrl)
+                    {
+                        Uri urlCheck = new Uri(longUrl);
+                        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(urlCheck);
+                        request.Timeout = 10000;
+                        try
+                        {
+                            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                        }
+                        catch (Exception)
+                        {
+                            throw new ShortnrNotFoundException();
+                        }
+                    }                    
 
 					int cap = 0;
-					string capString = ConfigurationManager.AppSettings["MaxNumberShortUrlsPerHour"];
-					int.TryParse(capString, out cap);
-					DateTime dateToCheck = DateTime.Now.Subtract(new TimeSpan(1, 0, 0));
-					int count = ctx.ShortUrls.Where(u => u.Ip == ip && u.Added >= dateToCheck).Count();
-					if (cap != 0 && count > cap)
-					{
-						throw new ArgumentException("Your hourly limit has exceeded");
-					}
+					int.TryParse(ConfigurationManager.AppSettings["MaxNumberShortUrlsPerHour"], out cap);
+                    if(cap > 0)
+                    {
+                        DateTime dateToCheck = DateTime.Now.Subtract(new TimeSpan(1, 0, 0));
+                        int count = ctx.ShortUrls.Where(u => u.Ip == ip && u.Added >= dateToCheck).Count();
+                        if (cap != 0 && count > cap)
+                        {
+                            throw new ArgumentException("Your hourly limit has exceeded");
+                        }
+                    }
 
 					if (!string.IsNullOrEmpty(segment))
 					{
@@ -129,19 +136,23 @@ namespace Shortnr.Web.Business.Implementations
 			using (var ctx = new ShortnrContext())
 			{
 				int i = 0;
-				while (true)
-				{
-					string segment = Guid.NewGuid().ToString().Substring(0, 6);
-					if (!ctx.ShortUrls.Where(u => u.Segment == segment).Any())
-					{
-						return segment;
-					}
-					if (i > 30)
-					{
-						break;
-					}
-					i++;
-				}
+
+                int segmentSize = 0;
+                if(!int.TryParse(ConfigurationManager.AppSettings["SegmentSize"], out segmentSize))
+                {
+                    segmentSize = 6;
+                }
+
+                while (i < 30)
+                {
+                    string segment = Guid.NewGuid().ToString().Replace("-","").Substring(0, segmentSize);
+                    if (!ctx.ShortUrls.Where(u => u.Segment == segment).Any())
+                    {
+                        return segment;
+                    }
+                    i++;
+                }
+				
 				return string.Empty;
 			}
 		}

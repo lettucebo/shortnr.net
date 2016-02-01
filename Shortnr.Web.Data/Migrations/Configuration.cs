@@ -1,18 +1,17 @@
 namespace Shortnr.Web.Data.Migrations
 {
-    using System;
-    using System.Data.Entity;
     using System.Data.Entity.Migrations;
-    using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Shortnr.Web.Data.ShortnrContext>
+    public sealed class Configuration : DbMigrationsConfiguration<ShortnrContext>
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
+            ContextKey = "Shortnr.Web.Data.ShortnrContext";
         }
 
-        protected override void Seed(Shortnr.Web.Data.ShortnrContext context)
+        protected override void Seed(ShortnrContext context)
         {
             //  This method will be called after migrating to the latest version.
 

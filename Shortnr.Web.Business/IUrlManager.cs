@@ -1,4 +1,4 @@
-﻿using Shortnr.Web.Entities;
+﻿using Shortnr.Web.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
