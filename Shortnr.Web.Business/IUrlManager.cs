@@ -10,6 +10,6 @@ namespace Shortnr.Web.Business
 	public interface IUrlManager
 	{
 		Task<ShortUrl> ShortenUrl(string longUrl, string ip, string segment = "");
-		Task<Stat> Click(string segment, string referer, string ip);
+		Task<Status> Click(string segment, string referer, string ip);
 	}
 }

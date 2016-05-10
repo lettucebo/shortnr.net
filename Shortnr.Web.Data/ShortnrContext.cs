@@ -9,7 +9,7 @@ namespace Shortnr.Web.Data
     public class ShortUrl
     {
         [Key]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [Required]
         [StringLength(1000)]
@@ -29,16 +29,16 @@ namespace Shortnr.Web.Data
         [Required]
         public int NumOfClicks { get; set; }
 
-        public virtual ICollection<Stat> Stats { get; set; }
+        public virtual ICollection<Status> Statuses { get; set; }
     }
 
-    public class Stat
+    public class Status
     {
         [Key]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [ForeignKey("ShortUrl")]
-        public int ShortUrlId { get; set; }
+        public Guid ShortUrlId { get; set; }
 
         [Required]
         public DateTime ClickDate { get; set; }
@@ -55,12 +55,12 @@ namespace Shortnr.Web.Data
 
     public class ShortnrContext : DbContext
 	{
-		public ShortnrContext(): base("name=Shortnr")
+		public ShortnrContext(): base("name=ShortnrEntities")
 		{
 
 		}
 
 		public virtual DbSet<ShortUrl> ShortUrls { get; set; }
-		public virtual DbSet<Stat> Stats { get; set; }
+		public virtual DbSet<Status> Statuses { get; set; }
 	}
 }
